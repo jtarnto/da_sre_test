@@ -1,20 +1,11 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  name: prometheus-exporter
+  name: prometheus-exporter-service
 spec:
-  replicas: 1
   selector:
-    matchLabels:
-      app: prometheus-exporter
-  template:
-    metadata:
-      labels:
-        app: prometheus-exporter
-    spec:
-      containers:
-      - name: prometheus-exporter
-        image: btc_exporter
-        ports:
-        - containerPort: 8000
-        imagePullPolicy: Never
+    app: prometheus-exporter
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
